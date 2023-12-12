@@ -5,15 +5,20 @@ const server = modulo()
 const bodyParser = require('body-parser')
 
 const authRoutes = require('./routes/auth/auth')
-const productsRoutes = require('./routes/produtcts/products')
+// server.set('view engine', 'ejs');
+// server.set('views', path.join(__dirname, 'views'));
 
+server.use(cookieSession({
+  name: 'session',
+  keys: ['septidfljkhsdlkgjdhsgkljsdhlgs69859680']
+}));
 
-
-server.use(authRoutes)
-server.use(productsRoutes)
-
-server.use(bodyParser.urlencoded({extended:true}))
+server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
+server.use(modulo.static("public"));
+
+
+server.use("/admin", authRoutes)
 
 
 server.listen(7777, () => {

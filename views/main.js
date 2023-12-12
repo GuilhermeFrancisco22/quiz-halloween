@@ -1,95 +1,86 @@
 const layout = require('./layout');
 const fs = require('fs');
 
-module.exports = () => {
+module.exports = (req, res) => {
   try {
     const data = fs.readFileSync('perguntas.json', 'utf8');
-    const dados = JSON.parse(data);
+    const questions = JSON.parse(data);
 
-    let selectedQuestion = null;
-    let gameStarted = false;
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let attempts = 3; // Definindo três tentativas por pergunta
 
-    // Gerar um número aleatório entre 1 e o total de perguntas
-    while (!selectedQuestion) {
-      const randomId = Math.floor(Math.random() * dados.length);
-      selectedQuestion = dados.find(pergunta => pergunta.id === randomId);
+    // Função para verificar a resposta do usuário
+    function checkAnswer(selectedOption) {
+      const currentQuestion = questions[currentQuestionIndex];
+      if (!currentQuestion || attempts === 0) {
+        // Se não há mais perguntas ou as tentativas acabaram, encerra o jogo
+        // Você pode adicionar aqui a lógica para mostrar o resultado final
+        console.log('Fim do jogo. Pontuação:', score);
+        return;
+      }
+
+      if (selectedOption === currentQuestion.resposta) {
+        score++;
+      } else {
+        attempts--;
+      }
+
+      // Avança para a próxima pergunta
+      currentQuestionIndex++;
+
+      // Atualiza a interface com a próxima pergunta (se houver)
+      showQuestion();
     }
 
-    const startButtonHTML = `
-      <div class="page">
-        <button id="startButton" class="btn-start">Iniciar Jogo</button>
-      </div>
-    `;
+    // Função para exibir a pergunta atual
+    function showQuestion() {
+      const currentQuestion = questions[currentQuestionIndex];
 
-    const cardHTML = selectedQuestion ? `
-      <div class="page" id="questionSection" style="display: none;">
-        <form method="GET" class="formLogin">
-          <section>
-          <section>
-          <div class="form-box">
-            <div class="form-value">
-              <form action="">
-                <h1 class="tema-atv">Tema: ${selectedQuestion.tema}</h1>
-                <div class="questao">${selectedQuestion.pergunta}</div>
-                <div class="box-question">
-                  <button class="opcao">${selectedQuestion.a}</button>
-                  <button class="opcao">${selectedQuestion.b}</button>
-                  <button class="opcao">${selectedQuestion.c}</button>
-                  <button class="opcao">${selectedQuestion.d}</button>
-                  <button class="opcao">${selectedQuestion.e}</button>
-                  <button class="opcao">${selectedQuestion.f}</button>
+      const startButtonHTML = `
+        <div class="page">
+          <button id="startButton" class="btn-start" style="display: ${currentQuestion ? 'none' : 'block'}">Iniciar Jogo</button>
+        </div>
+      `;
+
+      const cardHTML = currentQuestion ? `
+        <div class="page" id="questionSection">
+          <form method="GET" class="formLogin" onsubmit="return false;">
+            <section>
+              <section>
+                <div class="form-box">
+                  <div class="form-value">
+                    <form action="">
+                      <h1 class="tema-atv">Tema: ${currentQuestion.tema}</h1>
+                      <div class="questao">${currentQuestion.pergunta}</div>
+                      <div class="box-question">
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.a}')">${currentQuestion.a}</button>
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.b}')">${currentQuestion.b}</button>
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.c}')">${currentQuestion.c}</button>
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.d}')">${currentQuestion.d}</button>
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.e}')">${currentQuestion.e}</button>
+                        <button class="opcao" onclick="checkAnswer('${currentQuestion.f}')">${currentQuestion.f}</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-                <button class="btn-confirma">Confirmar Questão</button>
-                <div class="resposta-certa">${selectedQuestion.resposta}</div>
-              </form>
-            </div>
-          </div>
-          </section>
-          </section>
-        </form>
-      </div>
-    ` : 'Não foi possível encontrar uma pergunta válida.';
+              </section>
+            </section>
+          </form>
+        </div>
+      ` : 'Não foi possível encontrar uma pergunta válida.';
 
-  // ...
+      const fullContent = layout({ content: startButtonHTML + cardHTML });
 
-const fullContent = layout({ content: startButtonHTML + cardHTML });
+      // Envia a página HTML gerada para o cliente
+      res.send(fullContent);
+    }
 
-
-
-const script = `
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const startButton = document.getElementById('startButton');
-      const questionSection = document.getElementById('questionSection');
-
-      startButton.addEventListener('click', function () {
-        startButton.style.display = 'none';
-        questionSection.style.display = 'block';
-        // Defina gameStarted como true para indicar que o jogo começou
-        gameStarted = true;
-      });
-    });
-  </script>
-`;
-
-return fullContent + script;
-
-
-
+    // Mostra a primeira pergunta quando o jogo inicia
+    showQuestion();
 
   } catch (err) {
     console.error('Erro ao ler o arquivo:', err);
-    return layout({ content: 'Erro ao ler o arquivo de perguntas' });
+    res.send(layout({ content: 'Erro ao ler o arquivo de perguntas' }));
   }
-
-
-
-
 };
-
-
-
-
-
-
-
