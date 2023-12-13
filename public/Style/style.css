@@ -1,175 +1,169 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
-
-
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #fdfdfd;
-   
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+@import url("./game.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
-    background-color: #480ca8;
-    background-image: url('../img/background.png');
-    background-size: cover;
-    
-     position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #480ca8;
+  background-image: url("../img/background.png");
+  background-size: cover;
+  position: absolute;
 }
 
 .formLogin {
-    display: flex;
-    flex-direction: column;
-    background-color:transparent;
-    border-radius: 7px;
-    padding: 40px;
-    box-shadow: 10px 10px 40px rgba(161, 6, 6, 0.4);
-    gap: 5px
-    
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  border-radius: 7px;
+  padding: 40px;
+  box-shadow: 10px 10px 40px rgba(161, 6, 6, 0.4);
+  gap: 5px;
 }
 
 .areaLogin img {
-    width: 420px;
+  width: 420px;
 }
 
 .formLogin h1 {
-    padding: 0;
-    margin: 0;
-    font-weight: 500;
-    font-size: 2.3em;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.3em;
+  font-family: "Inter", sans-serif;
 }
 
 .formLogin p {
-    display: inline-block;
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 25px;
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 25px;
+  font-family: "Inter", sans-serif;
 }
 
 .formLogin input {
-    padding: 15px;
-    font-size: 14px;
-    border: 1px solid #fff;
-    margin-bottom: 20px;
-    margin-top: 5px;
-    border-radius: 4px;
-    transition: all linear 160ms;
-    outline: none;
+  font-family: "Inter", sans-serif;
+  padding: 15px;
+  font-size: 14px;
+  border: 1px solid #fff;
+  margin-bottom: 20px;
+  margin-top: 5px;
+  border-radius: 4px;
+  transition: all linear 160ms;
+  outline: none;
 }
 
-
 .formLogin input:focus {
-    border: 1px solidrgb(228, 100, 14);
+  border: 1px solidrgb(228, 100, 14);
+  font-family: "Inter", sans-serif;
 }
 
 .formLogin label {
-    font-size: 14px;
-    font-weight: 600;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
 }
 
 .formLogin a {
-    display: inline-block;
-    margin-bottom: 20px;
-    font-size: 13px;
-    color: #fff;
-    transition: all linear 160ms;
+  font-family: "Inter", sans-serif;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #fff;
+  transition: all linear 160ms;
 }
 
 .formLogin a:hover {
-    color: rgb(228, 100, 14);
+  color: rgb(228, 100, 14);
 }
 
 .btn {
-    background-color: rgb(228, 100, 14);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
-    border: none !important;
-    transition: all linear 160ms;
-    cursor: pointer;
-    margin: 0 !important;
-
+  font-family: "Inter", sans-serif;
+  background-color: rgb(228, 100, 14);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none !important;
+  transition: all linear 160ms;
+  cursor: pointer;
+  margin: 0 !important;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    background-color:rgb(228, 100, 14);
-
+  transform: scale(1.05);
+  background-color: rgb(228, 100, 14);
 }
 
 /*  BANNER */
 
+.container {
+  background-image: url("../img/banner.png");
+}
 
-.btn-open{
- margin-top: -10%;
+.btn-open {
+  margin-top: -10%;
   margin-left: 50%;
 }
 
-.btn-entrar{
+.btn-entrar {
   font-size: 40px;
   color: rgb(255, 255, 255);
   text-decoration: none;
   background-color: rgb(228, 100, 14);
   padding: 20px;
-  font-family: 'Creepster';
+  font-family: "Creepster";
   border-radius: 15px;
-  
 }
-.btn-entrar:hover{
+.btn-entrar:hover {
   color: black;
 }
 
- .container{
-  background-image: url('../img/background.png');
-
-} 
-
-
-.tema-atv{
+.tema-atv {
   text-align: center;
 }
-.questao{
+.questao {
   padding: 30px;
   font-size: 18px;
 }
 
-.opcao{
+.opcao {
   font-size: 30px;
   color: rgb(255, 255, 255);
   text-decoration: none;
   background-color: rgb(228, 100, 14);
   padding: 20px;
-  font-family: 'Creepster';
+  font-family: "Creepster";
   border-radius: 15px;
 }
 
-.box-question{
+.box-question {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-.btn-confirma{
+.btn-confirma {
   font-size: 30px;
   color: rgb(255, 255, 255);
   text-decoration: none;
   background-color: rgb(0, 0, 0);
   padding: 20px;
-  font-family: 'Creepster';
+  font-family: "Creepster";
   border-radius: 15px;
   margin: 10px;
   margin-left: 30%;
 }
-
-/*  TIMER */
 
 .timer {
   font-size: 24px;
@@ -177,22 +171,21 @@ body {
   color: #ffffff;
 }
 
-/* Estilizando quando o timer estiver ativo */
 .timer.active {
   color: red;
 }
 
-.btn-start{
+.btn-start {
   font-size: 30px;
   color: rgb(255, 255, 255);
   text-decoration: none;
   background-color: rgb(228, 100, 14);
   padding: 20px;
-  font-family: 'Creepster';
+  font-family: "Creepster";
   border-radius: 15px;
-  transition: .7s;
+  transition: 0.7s;
 }
 
-.btn-start:hover{
+.btn-start:hover {
   color: black;
 }
